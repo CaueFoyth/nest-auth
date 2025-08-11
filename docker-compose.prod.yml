@@ -1,0 +1,34 @@
+services:
+  mysql-prod:
+    image: mysql:8.0
+    container_name: auth-mysql-prod
+    env_file:
+      - .env.prod
+    volumes:
+      - mysql_prod_data:/var/lib/mysql
+    networks:
+      - auth-prod-network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  auth-api-prod:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.prod
+    container_name: auth-api-prod
+    env_file:
+      - .env.prod
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql-prod
+    networks:
+      - auth-prod-network
+    restart: unless-stopped
+
+volumes:
+  mysql_prod_data:
+
+networks:
+  auth-prod-network:
+    driver: bridge
