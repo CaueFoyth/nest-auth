@@ -28,7 +28,7 @@ export class AuthService {
   /**
    * Registra novo usuário no sistema
    * @param registerDto Dados de registro
-   * @returns Promise<AuthResponseDto> Tokens e dados do usuário
+   * @returns Promise<AuthResponseDto> Dados do usuário
    */
   async register(registerDto: RegisterDto): Promise<AuthResponseDto> {
     const existingUser = await this.userService.findByEmail(registerDto.email);
@@ -45,18 +45,9 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    const payload: JwtPayload = {
-      sub: user.id,
-      email: user.email,
-    };
-
-    const tokens = await this.tokenService.generateTokenPair(payload);
-
     delete user.password;
 
     return {
-      accessToken: tokens.accessToken,
-      refreshToken: tokens.refreshToken,
       user,
       expiresIn: 900,
     };

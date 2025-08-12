@@ -53,7 +53,7 @@ describe('AuthService', () => {
       password: 'StrongPass123!',
     };
 
-    it('deve orquestrar a criação, hash de senha e geração de tokens para um novo usuário', async () => {
+    it('deve orquestrar a criação, hash de senha para um novo usuário', async () => {
       const hashedPassword = 'hashedPassword123';
       const createdUser = {
         id: '1',
@@ -80,12 +80,7 @@ describe('AuthService', () => {
         ...registerDto,
         password: hashedPassword,
       });
-      expect(mockTokenService.generateTokenPair).toHaveBeenCalledWith({
-        sub: createdUser.id,
-        email: createdUser.email,
-      });
       expect(result.user).not.toHaveProperty('password');
-      expect(result.accessToken).toBe(tokens.accessToken);
     });
 
     it('deve lançar ConflictException ao tentar registrar um e-mail que já existe', async () => {

@@ -114,8 +114,6 @@ Resposta de sucesso (201 Created):
 
 ```json
 {
-  "accessToken": "token.jwt.aqui",
-  "refreshToken": "refresh.token.aqui",
   "user": {
     "id": "uuid-do-usuario",
     "email": "usuario@example.com",

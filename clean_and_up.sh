@@ -19,4 +19,4 @@ echo "Removendo node_modules e dist..."
 sudo rm -rf node_modules dist
 
 echo "Subindo o docker-compose..."
-docker compose -f docker-compose.dev.yml up --build --force-recreate
+docker compose -f docker-compose.prod.yml up --build --force-recreate

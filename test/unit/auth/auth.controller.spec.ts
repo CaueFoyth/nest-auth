@@ -4,9 +4,9 @@ import { AuthService } from '../../../src/auth/services/auth.service';
 import { RegisterDto } from '../../../src/auth/dto/register.dto';
 import { LoginDto } from '../../../src/auth/dto/login.dto';
 import { User } from '../../../src/users/entities/user.entity';
-import { AuthResponse } from 'src/auth/types/auth-response.type';
+import { AuthResponseDto as AuthResponse } from 'src/auth/dto/auth-response.dto';
 
-const mockAuthService: jest.Mocked<AuthService> = {
+const mockAuthService:  jest.Mocked<Partial<AuthService>> = {
   register: jest.fn(),
   login: jest.fn(),
   refresh: jest.fn(),

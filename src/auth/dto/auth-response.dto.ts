@@ -3,10 +3,10 @@ import { User } from '../../users/entities/user.entity';
 
 export class AuthResponseDto {
   @ApiProperty()
-  accessToken: string;
+  accessToken?: string;
 
   @ApiProperty()
-  refreshToken: string;
+  refreshToken?: string;
 
   @ApiProperty()
   user: Partial<User>;

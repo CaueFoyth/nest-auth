@@ -8,7 +8,7 @@ import {
   Get,
   Headers,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, OmitType } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { AuthService } from '../services/auth.service';
 import { RegisterDto } from '../dto/register.dto';
@@ -19,6 +19,11 @@ import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { User } from '../../users/entities/user.entity';
 import { Public } from '../../common/decorators/public.decorator';
+
+export class RegisterResponseDto extends OmitType(AuthResponseDto, [
+  'accessToken',
+  'refreshToken',
+] as const) {}
 
 /**
  * Controller de Autenticação
@@ -44,7 +49,7 @@ export class AuthController {
   @ApiResponse({
     status: 201,
     description: 'Usuário registrado com sucesso',
-    type: AuthResponseDto,
+    type: RegisterResponseDto,
   })
   @ApiResponse({
     status: 409,
