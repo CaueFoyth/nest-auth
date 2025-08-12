@@ -74,7 +74,7 @@ Ajuste `.env.prod` para valores de produção (senhas fortes, URLs reais, etc).
 2. Inicie os contêineres:
 
 ```bash
-docker compose --env-file .env -f docker-compose.prod.yml up --build
+docker compose -f docker-compose.prod.yml up --build
 ```
 
 ---
